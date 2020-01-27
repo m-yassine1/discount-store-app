@@ -40,16 +40,16 @@ public class Customer {
 
     public Customer(String name, LocalDate creationDate, Constant.CustomerType type) {
         setName(name);
-        setType(type);
         setCreationDate(creationDate);
+        setType(type);
         setPercentageDiscount();
         setItems(null);
     }
 
     public Customer(String name, LocalDate creationDate, Constant.CustomerType type, List<Item> items) {
         setName(name);
-        setType(type);
         setCreationDate(creationDate);
+        setType(type);
         setPercentageDiscount();
         setItems(items);
     }
@@ -68,7 +68,9 @@ public class Customer {
     }
 
     public void setPercentageDiscount() {
-        this.percentageDiscount = CustomerHelper.getPercentageDiscount(this);
+        this.percentageDiscount = getType() == null ?
+                CustomerHelper.getPercentageDiscountByDate(this)
+                : CustomerHelper.getPercentageDiscount(this);
     }
 
     public LocalDate getCreationDate() {

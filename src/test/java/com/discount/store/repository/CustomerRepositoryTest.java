@@ -2,11 +2,9 @@ package com.discount.store.repository;
 
 import com.discount.store.model.Customer;
 import com.discount.store.retail.util.Constant;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -15,14 +13,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 
-@RunWith(SpringRunner.class)
-@WebMvcTest
+@DataJpaTest
 public class CustomerRepositoryTest {
     @Autowired
     private CustomerRepository customerRepository;
 
     @Test
-    public void saveTest() {
+    public void saveTest() throws Exception {
         final String name = "John Doe";
         LocalDate creationDate = LocalDate.now();
         Customer customer = new Customer(name, creationDate, Constant.CustomerType.employee);

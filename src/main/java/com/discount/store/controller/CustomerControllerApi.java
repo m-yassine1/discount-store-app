@@ -49,20 +49,20 @@ public class CustomerControllerApi {
 
     @PutMapping(path = "{customerId}")
     public Customer updateCustomer(@PathVariable("customerId") int customerId, @Valid @RequestBody CustomerRequest updateCustomer) {
-        Customer customer = customerService.updateCustomer(customerId, updateCustomer);
-        if(customer == null) {
+        Optional<Customer> customer = customerService.updateCustomer(customerId, updateCustomer);
+        if(!customer.isPresent()) {
             throw new ResourceNotFoundException("Customer " + customerId + " not found");
         }
-        return customer;
+        return customer.get();
     }
 
     @DeleteMapping(path = "{customerId}")
     public Customer deleteCustomer(@PathVariable("customerId") int customerId) {
-        Customer customer = customerService.deleteCustomer(customerId);
-        if(customer == null) {
+        Optional<Customer> customer = customerService.deleteCustomer(customerId);
+        if(!customer.isPresent()) {
             throw new ResourceNotFoundException("Customer " + customerId + " not found");
         }
-        return customer;
+        return customer.get();
     }
 
     @PostMapping(path = "{customerId}/items")
@@ -87,19 +87,19 @@ public class CustomerControllerApi {
 
     @PutMapping(path = "{customerId}/items/{itemId}")
     public Item updateItem(@PathVariable("customerId") int customerId, @PathVariable("itemId") int itemId, @Valid @RequestBody ItemRequest updateItem) {
-        Item item = itemService.updateItem(customerId, itemId, updateItem);
-        if(item == null) {
+        Optional<Item> item = itemService.updateItem(customerId, itemId, updateItem);
+        if(!item.isPresent()) {
             throw new ResourceNotFoundException("Customer " + customerId + " does not have item " + itemId);
         }
-        return item;
+        return item.get();
     }
 
     @DeleteMapping(path = "{customerId}/items/{itemId}")
     public Item deleteItem(@PathVariable("customerId") int customerId, @PathVariable("itemId") int itemId) {
-        Item item = itemService.deleteItem(customerId, itemId);
-        if(item == null) {
+        Optional<Item> item = itemService.deleteItem(customerId, itemId);
+        if(!item.isPresent()) {
             throw new ResourceNotFoundException("Customer " + customerId + " does not have item " + itemId);
         }
-        return item;
+        return item.get();
     }
 }

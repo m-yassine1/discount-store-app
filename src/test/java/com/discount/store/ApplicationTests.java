@@ -9,7 +9,7 @@ import static org.junit.Assert.assertTrue;
 class ApplicationTests {
 
 	@Test
-	void contextLoads() {
+	void contextLoads() throws Exception {
 		Application.main(new String[] {});
 		assertTrue("If I run, Means I'm Okay!", true);
 	}

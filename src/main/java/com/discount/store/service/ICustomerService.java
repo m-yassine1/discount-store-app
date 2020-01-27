@@ -8,8 +8,8 @@ import java.util.Optional;
 
 public interface ICustomerService {
     Customer insertCustomer(CustomerRequest customer);
-    Customer updateCustomer(int id, CustomerRequest customer);
-    Customer deleteCustomer(int id);
+    Optional<Customer> updateCustomer(int id, CustomerRequest customer);
+    Optional<Customer> deleteCustomer(int id);
     List<Customer> getCustomers();
     Optional<Customer> getCustomer(int id);
 }

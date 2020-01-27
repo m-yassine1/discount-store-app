@@ -10,7 +10,7 @@ public class CustomerHelper {
     public static int getPercentageDiscount(Customer customer) {
         switch (customer.getType()) {
             case normal:
-                return customer.getCreationDate().isBefore(LocalDate.now().minusYears(2)) ? 5 : 0;
+            return getPercentageDiscountByDate(customer);
             case employee:
                 return 30;
             case affiliate:
@@ -18,6 +18,10 @@ public class CustomerHelper {
             default:
                 throw new IllegalStateException("Unexpected value: " + customer.getType());
         }
+    }
+
+    public static int getPercentageDiscountByDate(Customer customer) {
+        return customer.getCreationDate().isBefore(LocalDate.now().minusYears(2)) ? 5 : 0;
     }
 
     public static double getTotalBill(Customer customer) {

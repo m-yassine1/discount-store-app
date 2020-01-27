@@ -34,20 +34,20 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public Customer updateCustomer(int id, CustomerRequest updateCustomer) {
+    public Optional<Customer> updateCustomer(int id, CustomerRequest updateCustomer) {
         return getCustomer(id).map(customer -> {
             customer.setCreationDate(updateCustomer.getCreationDate());
             customer.setName(updateCustomer.getName());
             customer.setType(updateCustomer.getType());
-            return customerRepository.save(customer);
-        }).orElse(null);
+            return Optional.of(customerRepository.save(customer));
+        }).orElse(Optional.empty());
     }
 
     @Override
-    public Customer deleteCustomer(int id) {
+    public Optional<Customer> deleteCustomer(int id) {
         return getCustomer(id).map(customer -> {
             customerRepository.delete(customer);
-            return customer;
-        }).orElse(null);
+            return Optional.of(customer);
+        }).orElse(Optional.empty());
     }
 }
